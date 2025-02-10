@@ -1,4 +1,4 @@
-import { Plus, X } from 'lucide-react';
+import { Plus, Trash2, X } from 'lucide-react';
 import Links from '../components/Links';
 import Navbar from '../components/Navbar';
 import { useEffect, useState } from 'react';
@@ -52,6 +52,37 @@ export default function Menu() {
         })
     }
 
+    async function deleteProduct(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You are going to delete this product",
+            icon: "warning",
+            confirmButtonColor: "#ea580c",
+            showCancelButton: true,
+        }).then(async result => {
+            if (result.isConfirmed) {
+                try {
+                    const delete_product = await pb.collection("products").delete(id)
+                    Swal.fire({
+                        title: "Product deleted changed",
+                        text: "You deleted a product from the menu",
+                        confirmButtonColor: "#ea580c",
+                        icon: "success"
+                    })
+                } catch (err) {
+                    Swal.fire({
+                        title: "Failed to delete Product",
+                        text: err,
+                        confirmButtonColor: "#ea580c",
+                        icon: "error"
+                    })
+                } finally {
+                    setDummy(Math.random());
+                }
+            }
+        })
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
             <Navbar />
@@ -80,9 +111,14 @@ export default function Menu() {
                                     {/* <span className="text-4xl">{item.product_image ? '🍔' : null}</span> */}
                                     {/* <span className="text-4xl">🍔</span> */}
                                     <img src={pb.files.getURL(item, item.product_image)} alt={item.product_name} className='w-[110px] h-[110px] object-cover rounded-md shadow-md' width={110} height={110} />
-                                    <span className="text-lg font-bold text-orange-500">
-                                        {item.product_price} RWF
-                                    </span>
+
+                                    <div className='relative flex flex-col items-end'>
+                                        <span className="text-lg font-bold text-orange-500">
+                                            {item.product_price} RWF
+                                        </span>
+                                        <Trash2 onClick={() => deleteProduct(item.id)} className='absolute top-[50px] text-red-500 cursor-pointer hover:bg-red-100 p-1.5 rounded-full overflow-visible' size={35} />
+
+                                    </div>
                                 </div>
                                 <h3 className="mb-2 text-lg font-semibold capitalize">{item.product_name}</h3>
                                 <div className="flex items-center justify-between">
@@ -95,6 +131,7 @@ export default function Menu() {
                                         {item.available ? 'Available' : 'Sold Out'}
                                     </span>
                                 </div>
+
                             </div>
                         ))}
                     </div>

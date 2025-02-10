@@ -15,17 +15,18 @@ export default function NewProduct({ setIsModalOpen, setDummy }) {
         }
     }
 
-    async function addProudct({ product_name, product_price, product_catergory, product_image }) {
+    async function addProudct({ product_name, product_price, product_category, product_image }) {
         // return console.log(product_image[0]);
 
         setLoading(true);
         try {
 
+            // return console.log(product_category)
 
             const add = await pb.collection("products").create({
                 product_name: product_name,
                 product_price: product_price,
-                product_catergory: product_catergory,
+                product_category: product_category,
                 product_image: product_image[0]
             });
 
@@ -51,12 +52,12 @@ export default function NewProduct({ setIsModalOpen, setDummy }) {
     }
 
     return (
-        <div id="modal" onClick={(e) => handleClose(e)} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div id="modal" onClick={(e) => handleClose(e)} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-lg p-8 w-full max-w-md">
-                <div className="flex justify-between items-center mb-6">
+                className="w-full max-w-md p-8 bg-white rounded-lg">
+                <div className="flex items-center justify-between mb-6">
                     <h3 className="text-xl font-bold">Add New Product</h3>
                     <button
                         onClick={() => setIsModalOpen(false)}
@@ -73,7 +74,7 @@ export default function NewProduct({ setIsModalOpen, setDummy }) {
                             name="name"
                             required
                             disabled={loading}
-                            className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+                            className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500"
                             {...register("product_name")}
                         />
                     </div>
@@ -85,7 +86,7 @@ export default function NewProduct({ setIsModalOpen, setDummy }) {
                             required
                             disabled={loading}
 
-                            className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+                            className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500"
                             {...register("product_price")}
                         />
                     </div>
@@ -96,16 +97,15 @@ export default function NewProduct({ setIsModalOpen, setDummy }) {
                             required
                             disabled={loading}
 
-                            className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+                            className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500"
                             {...register("product_category")}
 
                         >
-                            <option value="Burgers">Burgers</option>
-                            <option value="Appetizers">Appetizers</option>
-                            <option value="Pizza">Pizza</option>
-                            <option value="Salads">Salads</option>
-                            <option value="Sides">Sides</option>
                             <option value="Drinks">Drinks</option>
+                            <option value="Food">Food</option>
+                            <option value="Snacks">Snacks</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Fruits">Fruits</option>
                         </select>
                     </div>
                     <div>
@@ -116,14 +116,14 @@ export default function NewProduct({ setIsModalOpen, setDummy }) {
                             required
                             disabled={loading}
 
-                            className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2"
+                            className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500"
                             {...register("product_image")}
                         />
                     </div>
 
                     <button
                         type="submit"
-                        className="w-full bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition-colors"
+                        className="w-full px-4 py-2 text-white transition-colors bg-orange-500 rounded-md hover:bg-orange-600"
                         disabled={loading}
                     >
                         {loading ? (
