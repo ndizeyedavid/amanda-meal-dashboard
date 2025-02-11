@@ -13,8 +13,8 @@ export default function Links() {
     }, []);
 
     return (
-        <div className="flex space-x-4 mb-8">
-            {['dashboard', 'menu', 'orders', 'customers'].map((data, tab) => (
+        <div className="flex mb-8 space-x-4">
+            {['dashboard', 'menu', 'orders', 'customers', 'promos'].map((data, tab) => (
                 // active: bg-orange-500 text-white shadow-lg transform scale-105
                 <Link
                     to={'/' + data}

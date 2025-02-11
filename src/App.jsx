@@ -8,6 +8,7 @@ import Menu from "./pages/Menu";
 import ForgetPassword from "./pages/ForgetPassword";
 import Settings from "./pages/Settings";
 import ProgressBar from "./components/ProgressBar";
+import Promos from "./pages/Promos";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
         <Route path="/customers" element={<Customers />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/Orders" element={<Orders />} />
+        <Route path="/promos" element={<Promos />} />
+
         <Route path="/settings" element={<Settings />} />
       </Routes>
     </BrowserRouter>

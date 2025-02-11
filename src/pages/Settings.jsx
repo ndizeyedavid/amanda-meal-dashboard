@@ -42,13 +42,13 @@ export default function Settings() {
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
             <Navbar />
 
-            <div className="max-w-7xl mx-auto px-4 py-8">
+            <div className="px-4 py-8 mx-auto max-w-7xl">
                 <Links />
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                    <h2 className="text-2xl font-bold mb-6">Settings</h2>
+                <div className="p-6 bg-white shadow-lg rounded-2xl">
+                    <h2 className="mb-6 text-2xl font-bold">Settings</h2>
 
-                    <div className="flex flex-col md:flex-row gap-6">
+                    <div className="flex flex-col gap-6 md:flex-row">
                         {/* Settings Tabs */}
                         <div className="md:w-1/4">
                             <div className="space-y-1">
@@ -72,26 +72,26 @@ export default function Settings() {
                             {activeTab === 'profile' && (
                                 <form onSubmit={handleSubmit(updateProfile)} className="space-y-6">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-20 h-20 rounded-full bg-orange-100 flex items-center justify-center text-3xl">
+                                        <div className="flex items-center justify-center w-20 h-20 text-3xl bg-orange-100 rounded-full">
                                             👤
                                         </div>
-                                        <button disabled={loading} className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                                        <button type='button' disabled={loading} className="px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-600">
                                             Change Avatar
                                         </button>
                                     </div>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700">Full Name</label>
-                                            <input disabled={loading} type="text" defaultValue={pb.authStore.record.uname} className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" {...register("uname")} />
+                                            <input disabled={loading} type="text" defaultValue={pb.authStore.record.uname} className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" {...register("uname")} />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700">Email</label>
-                                            <input disabled={loading} type="email" defaultValue={pb.authStore.record.email} className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" {...register("email")} />
+                                            <input disabled={loading} type="email" defaultValue={pb.authStore.record.email} className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" {...register("email")} />
                                         </div>
                                     </div>
 
-                                    <div className="mt-6 flex justify-end">
-                                        <button disabled={loading} type='submit' className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                                    <div className="flex justify-end mt-6">
+                                        <button disabled={loading} type='submit' className="px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-600">
                                             {loading ? (
                                                 <span className="flex items-center gap-2"><Loader size={30} id="spin" /> Loading</span>
                                             )
@@ -104,18 +104,18 @@ export default function Settings() {
 
                             {activeTab === 'restaurant' && (
                                 <div className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700">Restaurant Owner</label>
-                                            <input type="text" defaultValue="Amanda" className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" />
+                                            <input type="text" defaultValue="Amanda" className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700">Location</label>
-                                            <input type="text" defaultValue="Kigali, Rwanda" className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" />
+                                            <input type="text" defaultValue="Kigali, Rwanda" className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700">Currency</label>
-                                            <select disabled className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                                            <select disabled className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500">
                                                 <option>RWF</option>
                                                 <option>USD</option>
                                                 <option>EUR</option>
@@ -123,7 +123,7 @@ export default function Settings() {
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700">Time Zone</label>
-                                            <select className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                                            <select className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500">
                                                 <option>Africa/Kigali (GMT+2)</option>
                                                 <option>UTC</option>
                                             </select>
@@ -152,25 +152,25 @@ export default function Settings() {
                             {activeTab === 'security' && (
                                 <div className="space-y-6">
                                     <div>
-                                        <h3 className="font-medium mb-4">Change Password</h3>
+                                        <h3 className="mb-4 font-medium">Change Password</h3>
                                         <div className="space-y-4">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">Current Password</label>
-                                                <input disabled={loading} type="password" className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" />
+                                                <input disabled={loading} type="password" className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" />
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">New Password</label>
-                                                <input disabled={loading} type="password" className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" />
+                                                <input disabled={loading} type="password" className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" />
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
-                                                <input disabled={loading} type="password" className="mt-1 block w-full rounded-md border-gray-300 outline-none border shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2" />
+                                                <input disabled={loading} type="password" className="block w-full p-2 mt-1 border border-gray-300 rounded-md shadow-sm outline-none focus:border-orange-500 focus:ring-orange-500" />
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* <div className="mt-6 flex justify-end">
-                                        <button disabled={loading} type='submit' className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                                    {/* <div className="flex justify-end mt-6">
+                                        <button disabled={loading} type='submit' className="px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-600">
                                             {loading ? (
                                                 <span className="flex items-center gap-2"><Loader size={30} id="spin" /> Loading</span>
                                             )
@@ -181,8 +181,8 @@ export default function Settings() {
                             )}
 
                             {/* Save Button */}
-                            {/* <div className="mt-6 flex justify-end">
-                                <button  className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                            {/* <div className="flex justify-end mt-6">
+                                <button  className="px-4 py-2 text-white bg-orange-500 rounded-lg hover:bg-orange-600">
                                     Save Changes
                                 </button>
                             </div> */}
