@@ -1,9 +1,9 @@
 export default function SingleStat({ label, value }) {
     return (
-        <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-            <h3 className="text-gray-500 text-sm">{label}</h3>
+        <div className="p-6 transition-shadow bg-white shadow-lg rounded-2xl hover:shadow-xl">
+            <h3 className="text-sm text-gray-500">{label}</h3>
             <div className="flex items-center justify-between mt-2">
-                <span className="text-2xl font-bold">{value}</span>
+                <span className="text-2xl font-bold">{isNaN(value) ? value : `${value.toLocaleString()} RWF`}</span>
             </div>
         </div>
     );

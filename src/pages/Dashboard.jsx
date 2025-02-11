@@ -47,9 +47,9 @@ export default function Dashboard() {
     }, []);
 
     const stats = [
-        { label: 'Total Sales', value: `${dailySales} RWF` },
-        { label: 'Active Orders', value: activeOrders },
-        { label: 'Total Customers', value: customers },
+        { label: 'Total Sales', value: dailySales },
+        { label: 'Active Orders', value: `${activeOrders} Orders` },
+        { label: 'Total Customers', value: `${customers} Users` },
         { label: 'Popular Item', value: 'Big Burger' },
     ];
 
@@ -62,10 +62,10 @@ export default function Dashboard() {
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
             <Navbar />
 
-            <div className="max-w-7xl mx-auto px-4 py-8">
+            <div className="px-4 py-8 mx-auto max-w-7xl">
                 <Links />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="grid grid-cols-1 gap-6 mb-8 md:grid-cols-2 lg:grid-cols-4">
                     {stats.map((stat, index) => (
                         <SingleStat
                             key={index}
@@ -75,8 +75,8 @@ export default function Dashboard() {
                     ))}
                 </div>
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                    <h2 className="text-xl font-bold mb-4">Recent Orders</h2>
+                <div className="p-6 bg-white shadow-lg rounded-2xl">
+                    <h2 className="mb-4 text-xl font-bold">Recent Orders</h2>
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead>
@@ -97,7 +97,7 @@ export default function Dashboard() {
                                         {/* <td className="py-4 h-[60px]">{}</td> */}
                                         <td className="py-4 h-[60px]"><MenuSquareIcon className='cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' onClick={() => showMenuList(order.expand.order_id.expand.product_id)} size={40} /></td>
                                         <td className="py-4">{order.expand.order_id.quantity}</td>
-                                        <td className="py-4">{order.expand.order_id.price} RWF</td>
+                                        <td className="py-4">{order.expand.order_id.price.toLocaleString()} RWF</td>
                                         <td className="py-4">
                                             <span
                                                 className={` capitalize px-3 py-1 rounded-full text-sm ${order.status === 'completed'

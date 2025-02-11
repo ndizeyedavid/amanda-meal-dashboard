@@ -13,6 +13,7 @@ export default function Orders() {
     const [preview, setPreview] = useState(false);
     const [dummy, setDummy] = useState(0);
     const [menuItems, setMenuItems] = useState([]);
+    const [refreshNotifications, setRefreshNotifications] = useState(0);
 
 
     useEffect(() => {
@@ -57,6 +58,7 @@ export default function Orders() {
                     })
                 } finally {
                     setDummy(Math.random());
+                    setRefreshNotifications(Math.random())
                 }
             }
 
@@ -65,40 +67,40 @@ export default function Orders() {
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
-            <Navbar />
+            <Navbar refreshNotifications={refreshNotifications} />
 
-            <div className="max-w-7xl mx-auto px-4 py-8">
+            <div className="px-4 py-8 mx-auto max-w-7xl">
                 <Links />
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                    <h2 className="text-2xl font-bold mb-6">All Orders</h2>
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="p-6 bg-white shadow-lg rounded-2xl">
+                    <h2 className="mb-6 text-2xl font-bold">All Orders</h2>
+                    <div className="overflow-hidden bg-white shadow-lg rounded-xl">
                         <div className="overflow-x-auto">
                             <table className="w-full">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Order ID
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Date
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Customer
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Items
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Total
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Quantity
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Status
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Action
                                         </th>
                                     </tr>
@@ -110,14 +112,14 @@ export default function Orders() {
                                                 #{order.expand.order_id.id}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                {order.created}
+                                                {new Date(order.created).toLocaleString()}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 {order.expand.order_id.expand.user_id.fname + " " + order.expand.order_id.expand.user_id.lname}
                                             </td>
                                             <td className="px-6 py-4">{<MenuSquareIcon className='cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' onClick={() => showMenuList(order.expand.order_id.expand.product_id)} size={40} />}</td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                {order.expand.order_id.price}
+                                                {order.expand.order_id.price.toLocaleString()} RWF
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap text-end">
                                                 {order.expand.order_id.quantity}
@@ -138,7 +140,7 @@ export default function Orders() {
                                                     </span>
                                                 </span>
                                             </td>
-                                            <td className='py-4 flex items-center gap-2'>
+                                            <td className='flex items-center gap-2 py-4'>
                                                 <CheckCircle onClick={() => changeStatus(order.id, "completed")} className='text-green-500 cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' size={35} />
                                                 <Truck onClick={() => changeStatus(order.id, "processing")} className='text-blue-500 cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' size={35} />
                                                 <XCircle onClick={() => changeStatus(order.id, "canceled")} className='text-red-500 cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' size={35} />

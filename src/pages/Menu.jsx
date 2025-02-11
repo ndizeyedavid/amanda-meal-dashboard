@@ -114,7 +114,7 @@ export default function Menu() {
 
                                     <div className='relative flex flex-col items-end'>
                                         <span className="text-lg font-bold text-orange-500">
-                                            {item.product_price} RWF
+                                            {item.product_price.toLocaleString()} RWF
                                         </span>
                                         <Trash2 onClick={() => deleteProduct(item.id)} className='absolute top-[50px] text-red-500 cursor-pointer hover:bg-red-100 p-1.5 rounded-full overflow-visible' size={35} />
 

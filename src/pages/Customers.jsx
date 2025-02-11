@@ -21,41 +21,41 @@ export default function Customers() {
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
             <Navbar />
 
-            <div className="max-w-7xl mx-auto px-4 py-8">
+            <div className="px-4 py-8 mx-auto max-w-7xl">
                 <Links />
 
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                    <h2 className="text-2xl font-bold mb-6">Customers</h2>
-                    <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="p-6 bg-white shadow-lg rounded-2xl">
+                    <h2 className="mb-6 text-2xl font-bold">Customers</h2>
+                    <div className="overflow-hidden bg-white shadow-lg rounded-xl">
                         <div className="overflow-x-auto">
                             <table className="w-full">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Profile
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             First Name
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Last Name
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Email
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Address
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Province
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             District
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Phone
                                         </th>
-                                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        <th className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                             Status
                                         </th>
                                     </tr>
@@ -65,7 +65,7 @@ export default function Customers() {
                                         <tr key={customer.id}>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <img
-                                                    src={customer.avatar}
+                                                    src={pb.files.getURL(customer, customer.avatar)}
                                                     alt={customer.fname + "'s Avatar"}
                                                     width={60}
                                                     height={60}

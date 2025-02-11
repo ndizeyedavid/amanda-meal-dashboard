@@ -3,21 +3,31 @@ import IsLoggedIn from '../utils/session.js'
 import pb from '../utils/pocketbase.js';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { Bell, ReceiptText, ReceiptTextIcon, User2 } from 'lucide-react';
 
-export default function Navbar() {
+export default function Navbar({ refreshNotifications }) {
 
     const navigate = useNavigate();
 
     IsLoggedIn();
 
+
     const [showNotifications, setShowNotifications] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
+    const [notifications, setNotifications] = useState([]);
 
-    const notifications = [
-        { id: 1, text: 'New order received', time: '5 min ago' },
-        { id: 2, text: 'Daily report ready', time: '1 hour ago' },
-        { id: 3, text: 'Low stock alert', time: '2 hours ago' },
-    ];
+    useEffect(() => {
+        async function fetch_notifications() {
+            const results = await pb.collection("checkout").getFullList({
+                filter: "status = 'pending'",
+                expand: "order_id,order_id.user_id,order_id.product_id"
+            });
+
+            setNotifications(results);
+        }
+
+        fetch_notifications();
+    }, [refreshNotifications]);
 
     function handleLogout() {
         Swal.fire({
@@ -37,13 +47,13 @@ export default function Navbar() {
     }
 
     return (
-        <nav className="bg-white shadow-lg relative">
-            <div className="max-w-7xl mx-auto px-4 py-3">
+        <nav className="relative bg-white shadow-lg">
+            <div className="px-4 py-3 mx-auto max-w-7xl">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center">
-                        <span className="text-2xl font-bold text-orange-500 w-[202px] h-auto">
+                        <Link to="/dashboard" className="text-2xl font-bold text-orange-500 w-[202px] h-auto">
                             🍔 Amanda Meal
-                        </span>
+                        </Link>
                     </div>
                     <div className="flex space-x-4">
                         <div className="relative">
@@ -54,26 +64,31 @@ export default function Navbar() {
                                     setShowProfile(false);
                                 }}
                             >
-                                <span className="text-xl">🔔</span>
-                                <span className="absolute top-0 right-0 bg-red-500 text-white text-xs rounded-full h-4 w-4">
-                                    3
-                                </span>
+                                <span className="text-xl"><Bell /></span>
+                                {notifications != 0 &&
+                                    <span className="absolute top-0 right-0 w-4 h-4 text-xs text-white bg-red-500 rounded-full">
+                                        {notifications.length}
+                                    </span>
+                                }
                             </button>
 
                             {showNotifications && (
-                                <div className="absolute right-0 mt-2 w-72 bg-white rounded-lg shadow-xl py-2 z-50">
+                                <div className="absolute right-0 z-50 py-2 mt-2 bg-white rounded-lg shadow-xl w-[320px]">
                                     <h3 className="px-4 py-2 text-sm font-semibold border-b">Notifications</h3>
                                     {notifications.map(notification => (
-                                        <div key={notification.id} className="px-4 py-3 hover:bg-gray-50 cursor-pointer">
-                                            <p className="text-sm">{notification.text}</p>
-                                            <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
+                                        <div key={notification.id} className="flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-100">
+                                            <ReceiptText className='p-1 bg-gray-100 rounded-full' size={35} />
+                                            <div>
+                                                <p className="text-sm">A <span className='px-1 bg-yellow-200 rounded-[30px]'>pending</span> from {notification.expand.order_id.expand.user_id.fname}(Order: {notification.expand.order_id.expand.product_id[0].product_name})</p>
+                                                <p className="mt-1 text-xs text-gray-500">{new Date(notification.created).toLocaleString()}</p>
+                                            </div>
                                         </div>
                                     ))}
-                                    <div className="border-t px-4 py-2">
-                                        <button className="text-sm text-orange-500 hover:text-orange-600 w-full text-center">
+                                    {/* <div className="px-4 py-2 border-t">
+                                        <button className="w-full text-sm text-center text-orange-500 hover:text-orange-600">
                                             View all notifications
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             )}
                         </div>
@@ -86,11 +101,11 @@ export default function Navbar() {
                                     setShowNotifications(false);
                                 }}
                             >
-                                <span className="text-xl">👤</span>
+                                <span className="text-xl"><User2 /></span>
                             </button>
 
                             {showProfile && (
-                                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl py-2 z-50">
+                                <div className="absolute right-0 z-50 w-48 py-2 mt-2 bg-white rounded-lg shadow-xl">
                                     <div className="px-4 py-3 border-b">
                                         <p className="text-sm font-semibold">{pb.authStore.record.uname}</p>
                                         <p className="text-xs text-gray-500">{pb.authStore.record.email}</p>
@@ -102,7 +117,7 @@ export default function Navbar() {
                                         Status
                                     </a>
                                     <div className="border-t">
-                                        <button onClick={() => handleLogout()} className="block px-4 py-2 w-full text-left text-sm text-red-600 hover:bg-gray-50">
+                                        <button onClick={() => handleLogout()} className="block w-full px-4 py-2 text-sm text-left text-red-600 hover:bg-gray-50">
                                             Sign out
                                         </button>
                                     </div>

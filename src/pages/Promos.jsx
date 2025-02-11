@@ -47,7 +47,7 @@ function Promos() {
 
                             {/* Preview */}
                             <div className="flex items-center justify-center w-full mx-auto">
-                                <div className="w-[100%] h-[189px] rounded-xl flex flex-col items-start px-5 gap-3 justify-center" style={{ backgroundImage: `url('${pb.files.getURL(promos, promos.promo_image)}')`, backgroundRepeat: "no-repeat", backgroundSize: "cover", backgroundPosition: "center" }}>
+                                <div className="w-[100%] h-[189px] rounded-xl flex flex-col items-start px-5 gap-3 justify-center" style={{ backgroundImage: `url('${pb.files.getURL(promos, promos.promo_image)}')`, backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
 
                                     <h3 className="text-3xl font-bold leading-snug text-white">{promos.title}</h3>
 
