@@ -25,7 +25,7 @@ function Promos() {
         <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
             <Navbar />
 
-            <div className="px-4 py-8 mx-auto max-w-9xl">
+            <div className="px-4 py-8 mx-auto max-w-7xl">
                 <Links />
 
                 <div className="p-6 bg-white shadow-lg rounded-2xl">

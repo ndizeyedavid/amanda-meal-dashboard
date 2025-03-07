@@ -9,6 +9,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import Settings from "./pages/Settings";
 import ProgressBar from "./components/ProgressBar";
 import Promos from "./pages/Promos";
+import { Toaster } from "react-hot-toast";
 
 
 function App() {
@@ -16,7 +17,11 @@ function App() {
 
   return (
     <BrowserRouter>
+
+      {/* utils */}
       <ProgressBar />
+      <Toaster />
+
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/forget-password" element={<ForgetPassword />} />
