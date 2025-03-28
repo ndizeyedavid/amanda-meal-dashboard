@@ -83,7 +83,7 @@ export default function Dashboard() {
                                 <tr className="text-left text-gray-500">
                                     <th className="pb-4">Order ID</th>
                                     <th className="pb-4">Customer</th>
-                                    <th className="pb-4">Items</th>
+                                    {/* <th className="pb-4">Items</th> */}
                                     <th className="pb-4">Quantity</th>
                                     <th className="pb-4">Total</th>
                                     <th className="pb-4">Status</th>
@@ -95,7 +95,7 @@ export default function Dashboard() {
                                         <td className="py-4">#{order.id}</td>
                                         <td className="py-4">{order.expand.order_id.expand.user_id.fname + " " + order.expand.order_id.expand.user_id.lname}</td>
                                         {/* <td className="py-4 h-[60px]">{}</td> */}
-                                        <td className="py-4 h-[60px]"><MenuSquareIcon className='cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' onClick={() => showMenuList(order.expand.order_id.expand.product_id)} size={40} /></td>
+                                        {/*<td className="py-4 h-[60px]"><MenuSquareIcon className='cursor-pointer hover:bg-gray-300 p-1.5 rounded-full overflow-visible' onClick={() => showMenuList(order.expand.order_id.expand.product_id)} size={40} /></td> */}
                                         <td className="py-4">{order.expand.order_id.quantity}</td>
                                         <td className="py-4">{order.expand.order_id.price.toLocaleString()} RWF</td>
                                         <td className="py-4">

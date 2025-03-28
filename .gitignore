@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# pokcetbase
+pb_data/*
+pb_migrations/*
